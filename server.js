@@ -1,5 +1,7 @@
-const express = require('express');
-const { MongoClient } = require('mongodb');
+import express from 'express';
+import { MongoClient } from 'mongodb';
+import linkRoutes from './routes/links.js'; // ודא שהנתיב נכון
+import mongoose from 'mongoose';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -8,9 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 // כתובת ה-URI של MongoDB
-
 const uri = "mongodb://username:password@localhost:27017/urlshortener";
-
 const client = new MongoClient(uri);
 
 // פונקציה לחיבור ל-MongoDB
@@ -21,15 +21,6 @@ async function connectToMongo() {
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
     }
-}
-
-// פונקציה להוספת קישור למסד הנתונים
-async function addLinkToDatabase(originalUrl) {
-    const database = client.db('urlshortener');
-    const collection = database.collection('shortlinks');
-
-    const doc = { url: originalUrl };
-    await collection.insertOne(doc);
 }
 
 // חיבור ל-MongoDB
@@ -53,8 +44,6 @@ app.post('/api/links', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-const linkRoutes = require('./routes/links'); // ודא שהנתיב נכון
 
 // חיבור ה-routes
 app.use('/api', linkRoutes); 

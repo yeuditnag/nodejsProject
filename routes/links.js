@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import Link from '../models/link.js'; // ודא שהנתיב נכון
+
 const router = express.Router();
-const Link = require('../models/link'); // ודא שהנתיב נכון
 
 // ה-endpoint שלך
 router.get('/redirect/:id', async (req, res) => {
@@ -28,4 +29,4 @@ router.get('/redirect/:id', async (req, res) => {
 
 // הוספת endpoints נוספים כאן...
 
-module.exports = router; // ייצוא ה-router
+export default router; // ייצוא ה-router

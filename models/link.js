@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const clickSchema = new mongoose.Schema({
     insertedAt: {
@@ -33,4 +33,4 @@ const linkSchema = new mongoose.Schema({
 
 const Link = mongoose.model('Link', linkSchema);
 
-module.exports = Link;
+export default Link;
